@@ -43,6 +43,10 @@ const financeRoutes = require("./src/routes/financeEntries");
 const treatmentPlanRoutes = require("./src/routes/treatmentPlan");
 const appointmentRoutes = require("./src/routes/appointment");
 
+app.get("/", () => {
+  res.send("This app is runinig on production");
+});
+
 app.use("/api/auth", authRoutes);
 app.use("/api/admin", adminRoutes);
 app.use("/api/doctor", doctorRoutes);
