@@ -43,7 +43,7 @@ const financeRoutes = require("./src/routes/financeEntries");
 const treatmentPlanRoutes = require("./src/routes/treatmentPlan");
 const appointmentRoutes = require("./src/routes/appointment");
 
-app.get("/", () => {
+app.get("/", (res, res) => {
   res.send("This app is runinig on production");
 });
 
