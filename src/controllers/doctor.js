@@ -17,6 +17,7 @@ exports.addDoctor = async (req, res) => {
       address,
       admin,
     } = req.body;
+    console.log(req.body);
     const doctorExists = await Doctor.findOne({ email });
 
     if (doctorExists) {
