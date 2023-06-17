@@ -1,4 +1,4 @@
-# Dental Patient and Coach Cost Management System
+# Dental Patient and Cost Management System
 
 ## Description
 This is a web application designed for dental practices, allowing the management of patients, doctors, appointments, medical records, treatment plans, and financial aspects of the clinic. The system involves four main user roles: Owner, Admin, Doctor, and Patient. Each role has specific functionalities and permissions within the application.
