@@ -24,10 +24,11 @@ router.post("/signUp", patientSignUp);
 router.get("/", getPatients);
 router.get("/medicalrecords", getMedicalRecords);
 router.post("/dentalChart", adddentalchart);
-router.get("/:patientid", getsinglemedicalrecord);
-router.patch("/:patientid", updatePatientMedicalRecord);
-router.get("/me", patientProtect, getMe);
+router.patch("/update/medicalrecord", updatePatientMedicalRecord);
+router.get("/myprofile", patientProtect, getMe);
 router.post("/addmedicalrecord", addmedicalrecord);
+router.get("/:patientid", getsinglemedicalrecord);
+
 // Update a patient's information
 router.patch("/update", patientProtect, updatePatient);
 
