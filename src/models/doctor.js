@@ -14,7 +14,6 @@ const doctorSchema = new mongoose.Schema({
   admin: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Admin",
-    required: true,
   },
 });
 
