@@ -7,16 +7,12 @@ const DentalCharts = require("../models/dentalchart");
 exports.patientSignUp = async (req, res) => {
   try {
     const { name, email, password } = req.body;
-
-    console.log("+++++++++++++++");
     const patientExists = await Patient.findOne({ email });
-
     if (patientExists) {
       return res
         .status(400)
         .json({ error: "Patient with this email already exists" });
     }
-    console.log("+++++++++++++++");
     const patientId = shortid.generate();
     const patient = await Patient.create({
       patientId,
@@ -24,8 +20,6 @@ exports.patientSignUp = async (req, res) => {
       email,
       password,
     });
-
-    console.log("+++++++++++++++");
 
     createSendToken(patient, 200, req, res);
 
@@ -68,6 +62,15 @@ exports.adddentalchart = async (req, res)=>{
       dentalChart
     });
     res.status(201).json({record:patient})
+  } catch (error) {
+    res.status(500).json({ error: "Server Error" });
+  }
+}
+exports.getdentalchart = async (req, res)=>{
+  try {
+   
+    const charts = await DentalCharts.find();
+    res.status(201).json({record:charts})
   } catch (error) {
     res.status(500).json({ error: "Server Error" });
   }
@@ -128,6 +131,36 @@ exports.updatePatient = async (req, res) => {
           name: updates.name,
           email: updates.email,
           address: updates.address,
+        },
+      },
+      { new: true }
+    );
+
+    if (!patient) {
+      return res.status(404).json({ error: "Patient not found" });
+    }
+
+    res.status(200).json(patient);
+  } catch (error) {
+    res.status(500).json({ error: "Server Error" });
+  }
+};
+exports.updatePatientByAdmin = async (req, res) => {
+  try {
+    const updates = req.body;
+    console.log(updates);
+    // Find the patient by ID and update the fields
+    const patient = await Patient.findByIdAndUpdate(
+      req.body.PId,
+      {
+        $set: {
+          name: updates.name,
+          email: updates.email,
+          password: updates.password,
+          address: updates.address,
+          contact:updates.contact,
+          city:updates.city,
+          age:updates.age,
         },
       },
       { new: true }
