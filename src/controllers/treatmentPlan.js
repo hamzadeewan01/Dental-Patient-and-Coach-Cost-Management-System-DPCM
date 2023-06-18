@@ -23,3 +23,33 @@ exports.createTreatmentPlan = async (req, res) => {
     });
   }
 };
+exports.getTreatmentPlanDoctor = async (req, res) => {
+  try {
+    const { doctorid } =
+      req.params;
+    // Create a new treatment plan
+    const treatmentPlan = await TreatmentPlan.find({doctor:doctorid}).populate("doctor");
+    res.status(200).json({ success: true, data: treatmentPlan });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: "Not found",
+      error: error.message,
+    });
+  }
+};
+exports.getTreatmentPlanpatient = async (req, res) => {
+  try {
+    const { patientid } =
+      req.params;
+    const treatmentPlan = await TreatmentPlan.find({patient:patientid}).populate("patient").populate('doctor');
+    console.log(treatmentPlan)
+    res.status(200).json({ success: true, data: treatmentPlan });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: "Not found",
+      error: error.message,
+    });
+  }
+};
